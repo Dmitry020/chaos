@@ -1,0 +1,130 @@
+<! DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            JQuery
+        </title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+       <script>
+            $(document).ready(function(){
+                $("h1").css("fontSize","100px");
+                $(".test").css("background-color","purple");
+                $(".red").css("background-color","purple");
+                $("#main").css("background-color","gold");
+                $(".blue").css("background-color","purple");
+                $("#a").css("background-color","gold");
+                $("#form").css("background-color","purple");
+                $("input").prop({disabled:true});
+                
+                $("a").prepend("↗");
+                $("a").attr("target","_BLANK");
+                
+                $("#button").click(function(){
+                
+                   $("a").removeAttr("target");
+                });
+                
+                
+                
+                $("#b1").click(function(){
+                   $("#str1").fadeIn("slow"); 
+                });
+                $("#b2").click(function(){
+                   $("#str2").fadeOut("slow"); 
+                });
+                $("#b3").click(function(){
+                   $("#str3").fadeTo("slow",0.4); 
+                });
+               $("#b4").click(function(){
+                   $("#str4").slideUp("slow"); 
+                });
+                $("#b5").click(function(){
+                   $("#str5").slideToggle("slow"); 
+                });
+                
+            });
+                $("a").each(function(){
+                    this.href = this.href.replace("http:", "https:");
+                });
+        </script>
+    </head>
+    <body>
+        <div id="button">
+            <button>cancel</button>
+        </div>
+        <div id="main">
+            <h1>The Sopranos</h1>
+            <img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2019/01/The-Sopranos-Cast.jpg" style="float:right;position: absolute; top:100px; right: 20px;width:350px;">
+            
+            <p class="test">Well, you woke up this morning</p>
+            <p class="blue">Got yourself a gun</p>
+            <p class="red">Your mama always said you'd be the chosen one</p>
+        </div>
+        <div id="form">
+            <input type="checkbox">
+            <input type="text">
+            <input type="password">
+        </div>
+        <div id="a">
+            <a href="https://www.youtube.com/watch?v=9W3A34TTxFU" id="one">Alabama</a><br>
+            <a href="https://www.hbo.com/the-sopranos" id="two">HBO</a><br>
+        </div>
+        <div id="table">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>
+                            Person
+                        </th>
+                        <th>
+                            Button
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p id="str1" style="display:none;">Entony</p>
+                        </td>
+                        <td>
+                            <button id="b1">Fade in</button>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <p id="str2" style="color:blue"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c2/Tony_Soprano.jpg/270px-Tony_Soprano.jpg" ></p>
+                        </td>
+                        <td>
+                            <button id="b2">Fade out</button>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <p id="str3" style="color:white;background-color:Gold">Christofer</p>
+                        </td>
+                        <td>
+                            <button id="b3">Fade to</button>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <p id="str4" style="">Junior</p>
+                        </td>
+                        <td>
+                            <button id="b4">Slide up</button>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <p id="str5" style="">Silvio</p>
+                        </td>
+                        <td>
+                            <button id="b5">Slide Toggle</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
