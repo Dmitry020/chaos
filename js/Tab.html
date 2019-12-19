@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)file:///D:/Brakets%20works/Tab.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Tables</title>
+<style>
+#f1{
+color: white;
+padding: 30px;
+}
+body{
+background: darkseagreen;
+}
+input{
+margin-bottom: 10px;
+}
+td, tr {
+padding: 30px;
+border: 2px solid white;
+min-width: 150px;
+min-height: 100px;
+}
+#func {
+display: none;
+flex-wrap: wrap;#flex-wrap задает правила вывода flex-элементов —  в одну строку или в несколько, с переносом блоков.
+}
+.fplace {
+background-color: forestgreen;
+padding: 10px;
+text-align: center;
+margin: 1px;
+}
+table {
+border: solid;
+border-width: 1px;
+}
+
+#table{
+text-align: center;
+}
+</style>
+<script>
+function randomInteger(min, max){
+return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function createTable(){
+let rows = document.getElementById("rows").value;
+let cols = document.getElementById("cols").value;
+document.getElementById("f1").style.display = "none";
+document.getElementById('func').style.display = 'flex';
+let table = document.createElement('table');
+for (let i = 0; i<= rows; i++){
+let tr = document.createElement('tr');
+if ( i != 0){
+for (let j = 0; j < cols; j++){
+let td = document.createElement('td');
+let textarea = document.createElement('textarea');
+let button = document.createElement("input");
+button.type = "button";
+button.value = "Save";
+button.onclick = function(){
+let td = button.parentNode;
+let text = td.childNodes[0].value;
+td.innerHTML = text;
+}
+td.appendChild(textarea);
+td.appendChild(document.createElement('br'));
+td.appendChild(button);
+tr.appendChild(td);
+}
+}
+else
+{
+let th = document.createElement('th');
+th.colSpan = cols;
+tr.appendChild(th);
+tr.style.display = "none";
+}
+table.appendChild(tr);
+}
+document.getElementById('table').appendChild(table);
+
+}
+function changeBorders(){
+let inputValue = document.getElementById("frameWidth").value;
+let selectValue = document.getElementById("select1").value;
+let table = document.getElementById('table').childNodes[0];
+table.style.border = selectValue;
+table.style.borderWidth = inputValue + 'px';
+}
+function addHeader(){
+let inputValue = document.getElementById("inHeader").value;
+let header = document.getElementsByTagName("th");
+header[0].innerHTML = inputValue;
+header[0].parentNode.style = "block";
+}
+function delRow(){
+let inputValue = document.getElementById("inDelRow").value;
+let table = document.getElementById('table');
+let table = document.getElementById("table").childNodes[0];
+if (table.childNodes.length - 1 < inputValue || inputValue < 1){
+alert("incorrect row");
+}else{
+table.childNodes[inputValue].remove();
+if (table.childNodes.length == 1){
+table.childNodes[0].remove();
+}
+}
+}
+function randCh(){
+let table = document.getElementById('table').childNodes[0];
+let row = table.childNodes[randomInteger(1, table.childNodes.length - 1)];
+let td = row.childNodes[randomInteger(0, row.childNodes.length - 1)];
+let randnum = randomInteger(0, 1);
+
+if (randnum == 0){
+let randColor = randomInteger(0, 0xFFFFFF);
+let color = randColor.toString(16);
+while (color.length < 6){
+color = 'A' + color;
+}
+td.style.background = '#'+color;
+
+randColor = randomInteger(0, 0xFFFFFF);
+color = randColor.toString(16);
+while (color.length < 6){
+color = 'F' + color;
+}
+td.style.color = '#'+color;
+
+let randSize = randomInteger(15,25);
+td.style.fontSize = randSize+'px';
+}
+else
+{
+
+let textarea = document.createElement('textarea');
+let button = document.createElement("input");
+button.type = "button";
+button.value = "Save";
+button.onclick = function(){
+let td = button.parentNode;
+let text = td.childNodes[0].value;
+td.innerHTML = text;
+}
+td.innerHTML = "";
+td.appendChild(textarea);
+td.appendChild(document.createElement('br'));
+td.appendChild(button);
+}
+}
+function delTable(){
+let table = document.getElementById('table').childNodes[0];
+table.remove();
+document.getElementById("f1").style.display = "block";
+document.getElementById('func').style.display = 'none';
+}
+</script>
+</head>
+
+<body>
+<form id="f1" style="display: block;">
+<span style="
+    margin-left: 150px;
+    width: 150px;
+    height: 150px;
+">Put there number  of rows and colomns
+ 
+Borders</span><br>
+
+<input type="number" name="rows" id="rows" placeholder="number of rows" style="
+    margin-left: 320px;
+"><br>
+<input type="number" name="cols" id="cols" placeholder="number of columns" style="
+    margin-left: 320px;
+"><br>
+<input type="button" onclick="createTable()" value="Create table" style="
+    margin-left: 340px;
+">
+</form>
+<div id="func" style="display: none;">
+<div class="fplace" id="ChangeBorders">
+<p>Change table borders</p>
+<input type="number" id="frameWidth" placeholder="Width in px" maxlength="3">
+<br>
+<select id="select1" name="frameType">
+<option value="e" disabled="" selected="" hidden="">type of border</option>
+<option value="dotted">dotted</option>
+<option value="dashed">dashed</option>
+<option value="solid">solid</option>
+<option value="double">double</option>
+<option value="groove">groove</option>
+<option value="ridge">ridge</option>
+<option value="inset">inset</option>
+<option value="outset">outset</option>
+</select>
+<br>
+<button id="func1" onclick="changeBorders()">Accept</button>
+<script>
+
+let button = document.getElementById("func1");
+let input = document.getElementById("frameWidth");
+let select = document.getElementById("select1");
+
+let inputValue = "";
+let selectValue = "";
+
+input.addEventListener('input', function (evt) {
+inputValue = this.value;
+button.innerHTML = "Accept " + inputValue + 'px '+ selectValue;
+});
+select.addEventListener('change', function (evt) {
+selectValue = this.value;
+button.innerHTML = "Accept " + inputValue + 'px ' + selectValue;
+});
+
+</script>
+</div>
+<div class="fplace" id="AddHeader">
+<p>Add heading</p>
+<input type="text" id="inHeader" placeholder="Title"><br>
+
+<button id="func1" onclick="addHeader()">Add</button>
+
+</div>
+<div class="fplace" id="DeleteRow">
+<p>Delete row</p>
+<input type="number" id="inDelRow" placeholder="Number of row"><br>
+
+<button id="func1" onclick="delRow()">Delete</button>
+
+</div>
+<div class="fplace" id="RandomChoice">
+<p>Magic</p>
+<button id="func1" onclick="randCh()">Click me</button>
+</div>
+<div class="fplace" id="Delete">
+<p>Delete table</p>
+<button id="func1" onclick="delTable()">Delete</button>
+</div>
+</div>
+<br>
+
+<div id="table"></div>
+<div id="debug"></div>
+
+
+</body></html>
